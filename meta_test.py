@@ -57,7 +57,7 @@ class L2LTest(tf.test.TestCase):
         }))
     minimize_ops = optimizer.meta_minimize(problem, 5)
     with self.test_session() as sess:
-      sess.run(tf.initialize_all_variables())
+      sess.run(tf.global_variables_initializer())
       cost, final_x = train(sess, minimize_ops, 1, 2)
 
     # Torch results
@@ -121,7 +121,7 @@ class L2LTest(tf.test.TestCase):
     minimize_ops = optimizer.meta_minimize(problem, 3,
                                            net_assignments=net_assignments)
     with self.test_session() as sess:
-      sess.run(tf.initialize_all_variables())
+      sess.run(tf.global_variables_initializer())
       train(sess, minimize_ops, 1, 2)
 
   def testSecondDerivatives(self):
@@ -133,7 +133,7 @@ class L2LTest(tf.test.TestCase):
     minimize_ops = optimizer.meta_minimize(problem, 3,
                                            second_derivatives=True)
     with self.test_session() as sess:
-      sess.run(tf.initialize_all_variables())
+      sess.run(tf.global_variables_initializer())
       train(sess, minimize_ops, 1, 2)
 
   def testConvolutional(self):
@@ -162,13 +162,13 @@ class L2LTest(tf.test.TestCase):
         net_assignments=[("conv", ["conv/w"])]
     )
     with self.test_session() as sess:
-      sess.run(tf.initialize_all_variables())
+      sess.run(tf.global_variables_initializer())
       train(sess, minimize_ops, 1, 2)
 
   def testWhileLoopProblem(self):
     """Tests L2L applied to problem with while loop."""
     def while_loop_problem():
-      x = tf.get_variable("x", shape=[], initializer=tf.ones_initializer)
+      x = tf.get_variable("x", shape=[], initializer=tf.ones_initializer())
 
       # Strange way of squaring the variable.
       _, x_squared = tf.while_loop(
@@ -183,7 +183,7 @@ class L2LTest(tf.test.TestCase):
         net_options={"layers": ()}))
     minimize_ops = optimizer.meta_minimize(while_loop_problem, 3)
     with self.test_session() as sess:
-      sess.run(tf.initialize_all_variables())
+      sess.run(tf.global_variables_initializer())
       train(sess, minimize_ops, 1, 2)
 
   def testSaveAndLoad(self):
@@ -203,7 +203,7 @@ class L2LTest(tf.test.TestCase):
       minimize_ops = optimizer.meta_minimize(problem, 3)
 
     with self.test_session(graph=g1) as sess:
-      sess.run(tf.initialize_all_variables())
+      sess.run(tf.global_variables_initializer())
       train(sess, minimize_ops, 1, 2)
 
       # Save optimizer.
@@ -222,7 +222,7 @@ class L2LTest(tf.test.TestCase):
       minimize_ops = optimizer.meta_minimize(problem, 3)
 
     with self.test_session(graph=g2) as sess:
-      sess.run(tf.initialize_all_variables())
+      sess.run(tf.global_variables_initializer())
       cost_loaded, x_loaded = train(sess, minimize_ops, num_unrolls, num_epochs)
 
     # The last cost should be the same.

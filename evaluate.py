@@ -56,10 +56,10 @@ def main(_):
   if FLAGS.optimizer == "Adam":
     cost_op = problem()
     problem_vars = tf.get_collection(tf.GraphKeys.TRAINABLE_VARIABLES)
-    problem_reset = tf.initialize_variables(problem_vars)
+    problem_reset = tf.variables_initializer(problem_vars)
 
     optimizer = tf.train.AdamOptimizer(FLAGS.learning_rate)
-    optimizer_reset = tf.initialize_variables(optimizer.get_slot_names())
+    optimizer_reset = tf.variables_initializer(optimizer.get_slot_names())
     update = optimizer.minimize(cost_op)
     reset = [problem_reset, optimizer_reset]
   elif FLAGS.optimizer == "L2L":

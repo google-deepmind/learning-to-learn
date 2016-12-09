@@ -46,7 +46,7 @@ def simple():
         "x",
         shape=[],
         dtype=tf.float32,
-        initializer=tf.ones_initializer)
+        initializer=tf.ones_initializer())
     return tf.square(x, name="x_squared")
 
   return build
@@ -59,7 +59,7 @@ def simple_multi_optimizer(num_dims=2):
     return tf.get_variable("x_{}".format(i),
                            shape=[],
                            dtype=tf.float32,
-                           initializer=tf.ones_initializer)
+                           initializer=tf.ones_initializer())
 
   def build():
     coordinates = [get_coordinate(i) for i in xrange(num_dims)]

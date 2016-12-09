@@ -64,7 +64,7 @@ class CoordinateWiseDeepLSTMTest(tf.test.TestCase):
     update, _ = net(gradients, state)
 
     with self.test_session() as sess:
-      sess.run(tf.initialize_all_variables())
+      sess.run(tf.global_variables_initializer())
       update_np = sess.run(update)
       self.assertAllEqual(update_np, np.zeros(shape))
 
@@ -111,7 +111,7 @@ class KernelDeepLSTMTest(tf.test.TestCase):
     update, _ = net(gradients, state)
 
     with self.test_session() as sess:
-      sess.run(tf.initialize_all_variables())
+      sess.run(tf.global_variables_initializer())
       update_np = sess.run(update)
       self.assertAllEqual(update_np, np.zeros(shape))
 

@@ -367,7 +367,7 @@ class MetaOptimizer(object):
       variables = (nest.flatten(state) +
                    x + constants)
       # Empty array as part of the reset process.
-      reset = [tf.initialize_variables(variables), fx_array.close()]
+      reset = [tf.variables_initializer(variables), fx_array.close()]
 
     # Operator to update the parameters and the RNN state after our loop, but
     # during an epoch.

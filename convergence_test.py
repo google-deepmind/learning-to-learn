@@ -53,7 +53,7 @@ class L2LTest(tf.test.TestCase):
     minimize_ops = optimizer.meta_minimize(problem, 20, learning_rate=1e-2)
     # L2L should solve the simple problem is less than 500 epochs.
     with self.test_session() as sess:
-      sess.run(tf.initialize_all_variables())
+      sess.run(tf.global_variables_initializer())
       cost, _ = train(sess, minimize_ops, 500, 5)
     self.assertLess(cost, 1e-5)
 

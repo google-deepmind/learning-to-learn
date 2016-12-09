@@ -129,7 +129,7 @@ class BatchNorm(base.AbstractModule):
     """
     if var_name not in self._initializers:
       if var_name == self.GAMMA:
-        self._initializers[self.GAMMA] = tf.ones_initializer
+        self._initializers[self.GAMMA] = tf.ones_initializer()
       elif var_name == self.BETA:
         self._initializers[self.BETA] = tf.zeros_initializer
 
@@ -160,7 +160,7 @@ class BatchNorm(base.AbstractModule):
         shape=self._mean_shape,
         collections=[tf.GraphKeys.MOVING_AVERAGE_VARIABLES,
                      tf.GraphKeys.VARIABLES],
-        initializer=tf.ones_initializer,
+        initializer=tf.ones_initializer(),
         trainable=False)
 
     def build_batch_stats():
@@ -226,7 +226,7 @@ class BatchNorm(base.AbstractModule):
         shape=self._mean_shape,
         collections=[tf.GraphKeys.MOVING_AVERAGE_VARIABLES,
                      tf.GraphKeys.VARIABLES],
-        initializer=tf.ones_initializer,
+        initializer=tf.ones_initializer(),
         trainable=False)
 
     self._moving_variance = tf.sub(self._moving_second_moment,
