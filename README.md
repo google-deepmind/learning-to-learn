@@ -48,9 +48,8 @@ The training and evaluation scripts support the following problems (see
 `util.py` for more details):
 
 * `simple`: One-variable quadratic function.
-* `simple-multi`: Two-variable quadratic function, where one of the variables,
-    where one of the variables is optimized using a learned optimizer and the
-    other one using Adam.
+* `simple-multi`: Two-variable quadratic function, where one of the variables
+    is optimized using a learned optimizer and the other one using Adam.
 * `quadratic`: Batched ten-variable quadratic function.
 * `mnist`: Mnist classification using a two-layer fully connected network.
 * `cifar`: Cifar10 classification using a convolutional neural network.
