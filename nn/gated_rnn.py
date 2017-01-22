@@ -42,7 +42,7 @@ from six.moves import xrange  # pylint: disable=redefined-builtin
 import tensorflow as tf
 
 from tensorflow.python.ops import array_ops
-from tensorflow.python.ops import rnn_cell
+from tensorflow.contrib import rnn
 
 from nn import base
 from nn import basic
@@ -318,11 +318,11 @@ class LSTM(rnn_core.RNNCore):
       gates = gates_h + gates_x + self._b
     else:
       # Parameters of gates are concatenated into one multiply for efficiency.
-      inputs_and_hidden = tf.concat(1, [inputs, prev_hidden])
+      inputs_and_hidden = tf.concat_v2([inputs, prev_hidden], 1)
       gates = tf.matmul(inputs_and_hidden, self._w_xh) + self._b
 
     # i = input_gate, j = new_input, f = forget_gate, o = output_gate
-    i, j, f, o = array_ops.split(1, 4, gates)
+    i, j, f, o = array_ops.split(gates, 4, 1)
 
     if self._use_peepholes:  # diagonal connections
       self._create_peephole_variables(inputs.dtype)
@@ -559,7 +559,7 @@ class LSTM(rnn_core.RNNCore):
       else:
         return create_batch_norm()
 
-  class CellWithExtraInput(rnn_cell.RNNCell):
+  class CellWithExtraInput(rnn.RNNCell):
     """Wraps an RNNCell to create a new RNNCell with extra input appended.
 
     This will pass the additional input `args` and `kwargs` to the __call__

@@ -62,7 +62,7 @@ def get_variables_in_module(module,
   Raises:
     NotConnectedError: If the module is not connected to the Graph.
   """
-  return get_variables_in_scope(module.var_scope, collection=collection)
+  return get_variables_in_scope(module.variable_scope, collection=collection)
 
 
 def check_initializers(initializers, keys):

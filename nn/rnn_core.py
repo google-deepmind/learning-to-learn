@@ -30,7 +30,7 @@ import six
 import tensorflow as tf
 
 from tensorflow.python.framework import tensor_shape
-from tensorflow.python.ops import rnn_cell
+from tensorflow.contrib import rnn
 from tensorflow.python.util import nest
 
 from nn import base
@@ -142,7 +142,7 @@ def trainable_initial_state(batch_size, state_size, dtype, initializers=None):
 
 
 @six.add_metaclass(abc.ABCMeta)
-class RNNCore(base.AbstractModule, rnn_cell.RNNCell):
+class RNNCore(base.AbstractModule, rnn.RNNCell):
   """Superclass for Recurrent Neural Network Cores.
 
   This class defines the basic functionality that every core should implement,

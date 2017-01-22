@@ -97,7 +97,7 @@ class MLP(base.AbstractModule, base.Transposable):
     connected to the graph.
     """
 
-    with tf.variable_scope(self._template.var_scope):
+    with tf.variable_scope(self._template.variable_scope):
       self._layers = [basic.Linear(self._output_sizes[i],
                                    name="linear_{}".format(i),
                                    initializers=self._initializers,
