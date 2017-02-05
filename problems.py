@@ -63,7 +63,7 @@ def simple_multi_optimizer(num_dims=2):
 
   def build():
     coordinates = [get_coordinate(i) for i in xrange(num_dims)]
-    x = tf.concat_v2([tf.expand_dims(c, 0) for c in coordinates], 0)
+    x = tf.concat([tf.expand_dims(c, 0) for c in coordinates], 0)
     return tf.reduce_sum(tf.square(x, name="x_squared"))
 
   return build

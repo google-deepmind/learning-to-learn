@@ -318,7 +318,7 @@ class LSTM(rnn_core.RNNCore):
       gates = gates_h + gates_x + self._b
     else:
       # Parameters of gates are concatenated into one multiply for efficiency.
-      inputs_and_hidden = tf.concat_v2([inputs, prev_hidden], 1)
+      inputs_and_hidden = tf.concat([inputs, prev_hidden], 1)
       gates = tf.matmul(inputs_and_hidden, self._w_xh) + self._b
 
     # i = input_gate, j = new_input, f = forget_gate, o = output_gate
