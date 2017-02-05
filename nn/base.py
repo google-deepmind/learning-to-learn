@@ -148,9 +148,9 @@ class AbstractModule(object):
   def variable_scope(self):
     """Returns the variable_scope declared by the module.
 
-    It is valid for library users to access the internal templated variable_scope,
-    but only makes sense to do so after connection. Therefore we raise an error
-    here if the variable_scope is requested before connection.
+    It is valid for library users to access the internal templated
+    variable_scope, but only makes sense to do so after connection. Therefore
+    we raise an error here if the variable_scope is requested before connection.
 
     The only case where it does make sense to access the variable_scope before
     connection is to get the post-uniquification name, which we support using

@@ -134,7 +134,8 @@ def ensemble(problems, weights=None):
 
 
 def _xent_loss(output, labels):
-  loss = tf.nn.sparse_softmax_cross_entropy_with_logits(logits=output, labels=labels)
+  loss = tf.nn.sparse_softmax_cross_entropy_with_logits(logits=output,
+                                                        labels=labels)
   return tf.reduce_mean(loss)
 
 
