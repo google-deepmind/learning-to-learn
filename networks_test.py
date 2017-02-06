@@ -51,8 +51,8 @@ class CoordinateWiseDeepLSTMTest(tf.test.TestCase):
   @parameterized.expand([
       ["zeros"],
       [{"w": "zeros", "b": "zeros", "bad": "bad"}],
-      [{"w": tf.zeros_initializer, "b": np.array([0])}],
-      [{"linear": {"w": tf.zeros_initializer, "b": "zeros"}}]
+      [{"w": tf.zeros_initializer(), "b": np.array([0])}],
+      [{"linear": {"w": tf.zeros_initializer(), "b": "zeros"}}]
   ])
   def testResults(self, initializer):
     """Tests zero updates when last layer is initialized to zero."""
@@ -96,8 +96,8 @@ class KernelDeepLSTMTest(tf.test.TestCase):
   @parameterized.expand([
       ["zeros"],
       [{"w": "zeros", "b": "zeros", "bad": "bad"}],
-      [{"w": tf.zeros_initializer, "b": np.array([0])}],
-      [{"linear": {"w": tf.zeros_initializer, "b": "zeros"}}]
+      [{"w": tf.zeros_initializer(), "b": np.array([0])}],
+      [{"linear": {"w": tf.zeros_initializer(), "b": "zeros"}}]
   ])
   def testResults(self, initializer):
     """Tests zero updates when last layer is initialized to zero."""
