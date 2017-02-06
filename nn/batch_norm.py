@@ -131,7 +131,7 @@ class BatchNorm(base.AbstractModule):
       if var_name == self.GAMMA:
         self._initializers[self.GAMMA] = tf.ones_initializer()
       elif var_name == self.BETA:
-        self._initializers[self.BETA] = tf.zeros_initializer
+        self._initializers[self.BETA] = tf.zeros_initializer()
 
   def _build_statistics_variance(self, input_batch,
                                  reduction_indices, use_batch_stats):
@@ -151,15 +151,15 @@ class BatchNorm(base.AbstractModule):
         "moving_mean",
         shape=self._mean_shape,
         collections=[tf.GraphKeys.MOVING_AVERAGE_VARIABLES,
-                     tf.GraphKeys.VARIABLES],
-        initializer=tf.zeros_initializer,
+                     tf.GraphKeys.GLOBAL_VARIABLES],
+        initializer=tf.zeros_initializer(),
         trainable=False)
 
     self._moving_variance = tf.get_variable(
         "moving_variance",
         shape=self._mean_shape,
         collections=[tf.GraphKeys.MOVING_AVERAGE_VARIABLES,
-                     tf.GraphKeys.VARIABLES],
+                     tf.GraphKeys.GLOBAL_VARIABLES],
         initializer=tf.ones_initializer(),
         trainable=False)
 
@@ -217,15 +217,15 @@ class BatchNorm(base.AbstractModule):
         "moving_mean",
         shape=self._mean_shape,
         collections=[tf.GraphKeys.MOVING_AVERAGE_VARIABLES,
-                     tf.GraphKeys.VARIABLES],
-        initializer=tf.zeros_initializer,
+                     tf.GraphKeys.GLOBAL_VARIABLES],
+        initializer=tf.zeros_initializer(),
         trainable=False)
 
     self._moving_second_moment = tf.get_variable(
         "moving_second_moment",
         shape=self._mean_shape,
         collections=[tf.GraphKeys.MOVING_AVERAGE_VARIABLES,
-                     tf.GraphKeys.VARIABLES],
+                     tf.GraphKeys.GLOBAL_VARIABLES],
         initializer=tf.ones_initializer(),
         trainable=False)
 

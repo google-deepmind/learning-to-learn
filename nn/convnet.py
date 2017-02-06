@@ -159,7 +159,7 @@ class ConvNet2D(base.AbstractModule, base.Transposable):
   def _instantiate_layers(self):
     """Instantiates all the convolutional modules used in the network."""
 
-    with tf.variable_scope(self._template.var_scope):
+    with tf.variable_scope(self._template.variable_scope):
       self._layers = tuple(conv.Conv2D(name="conv_2d_{}".format(i),
                                        output_channels=self._output_channels[i],
                                        kernel_shape=self._kernel_shapes[i],
@@ -387,7 +387,7 @@ class ConvNet2DTranspose(ConvNet2D):
   def _instantiate_layers(self):
     """Instantiates all the convolutional modules used in the network."""
 
-    with tf.variable_scope(self._template.var_scope):
+    with tf.variable_scope(self._template.variable_scope):
       self._layers = tuple(
           conv.Conv2DTranspose(name="conv_2d_transpose_{}".format(i),
                                output_channels=self._output_channels[i],

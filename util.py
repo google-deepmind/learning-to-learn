@@ -98,7 +98,7 @@ def get_config(problem_name, path=None):
     net_assignments = None
   elif problem_name == "cifar":
     mode = "train" if path is None else "test"
-    problem = problems.cifar10("/tmp/cifar10",
+    problem = problems.cifar10("cifar10",
                                conv_channels=(16, 16, 16),
                                linear_layers=(32,),
                                mode=mode)
@@ -106,7 +106,7 @@ def get_config(problem_name, path=None):
     net_assignments = None
   elif problem_name == "cifar-multi":
     mode = "train" if path is None else "test"
-    problem = problems.cifar10("/tmp/cifar10",
+    problem = problems.cifar10("cifar10",
                                conv_channels=(16, 16, 16),
                                linear_layers=(32,),
                                mode=mode)

@@ -145,30 +145,30 @@ class AbstractModule(object):
     return out
 
   @property
-  def var_scope(self):
+  def variable_scope(self):
     """Returns the variable_scope declared by the module.
 
-    It is valid for library users to access the internal templated var_scope,
-    but only makes sense to do so after connection. Therefore we raise an error
-    here if the var_scope is requested before connection.
+    It is valid for library users to access the internal templated
+    variable_scope, but only makes sense to do so after connection. Therefore
+    we raise an error here if the variable_scope is requested before connection.
 
-    The only case where it does make sense to access the var_scope before
+    The only case where it does make sense to access the variable_scope before
     connection is to get the post-uniquification name, which we support using
     the separate .name property.
 
     Returns:
-      var_scope: `tf.VariableScope` instance of the internal `tf.Template`.
+      variable_scope: `tf.VariableScope` instance of the internal `tf.Template`.
 
     Raises:
       NotConnectedError: If the module is not connected to the Graph.
     """
     self._ensure_is_connected()
-    return self._template.var_scope
+    return self._template.variable_scope
 
   @property
   def name(self):
     """Returns the name of the Module."""
-    return self._template.var_scope.name
+    return self._template.variable_scope.name
 
   @property
   def is_connected(self):

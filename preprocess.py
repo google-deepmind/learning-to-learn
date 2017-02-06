@@ -68,4 +68,4 @@ class LogAndSign(nn.AbstractModule):
     clamped_log = Clamp(min_value=-1.0)(log / self._k)  # pylint: disable=not-callable
     sign = Clamp(min_value=-1.0, max_value=1.0)(gradients * np.exp(self._k))  # pylint: disable=not-callable
 
-    return tf.concat(ndims - 1, [clamped_log, sign])
+    return tf.concat([clamped_log, sign], ndims - 1)

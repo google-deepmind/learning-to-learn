@@ -63,7 +63,7 @@ def simple_multi_optimizer(num_dims=2):
 
   def build():
     coordinates = [get_coordinate(i) for i in xrange(num_dims)]
-    x = tf.concat(0, [tf.expand_dims(c, 0) for c in coordinates])
+    x = tf.concat([tf.expand_dims(c, 0) for c in coordinates], 0)
     return tf.reduce_sum(tf.square(x, name="x_squared"))
 
   return build
@@ -94,7 +94,7 @@ def quadratic(batch_size=128, num_dims=10, stddev=0.01, dtype=tf.float32):
                         initializer=tf.random_uniform_initializer(),
                         trainable=False)
 
-    product = tf.squeeze(tf.batch_matmul(w, tf.expand_dims(x, -1)))
+    product = tf.squeeze(tf.matmul(w, tf.expand_dims(x, -1)))
     return tf.reduce_mean(tf.reduce_sum((product - y) ** 2, 1))
 
   return build
@@ -134,7 +134,8 @@ def ensemble(problems, weights=None):
 
 
 def _xent_loss(output, labels):
-  loss = tf.nn.sparse_softmax_cross_entropy_with_logits(output, labels)
+  loss = tf.nn.sparse_softmax_cross_entropy_with_logits(logits=output,
+                                                        labels=labels)
   return tf.reduce_mean(loss)
 
 

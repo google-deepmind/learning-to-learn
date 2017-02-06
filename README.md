@@ -1,6 +1,6 @@
 # [Learning to Learn](https://arxiv.org/abs/1606.04474) in TensorFlow
 
-Compatible with TensorFlow 0.12.
+Compatible with TensorFlow 1.0
 
 
 ## Training
