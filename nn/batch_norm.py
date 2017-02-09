@@ -230,8 +230,8 @@ class BatchNorm(base.AbstractModule):
         trainable=False)
 
     self._moving_variance = tf.subtract(self._moving_second_moment,
-                                   tf.square(self._moving_mean),
-                                   name="moving_variance")
+                                        tf.square(self._moving_mean),
+                                        name="moving_variance")
 
     def build_batch_stats():
       """Builds the batch statistics calculation ops."""
