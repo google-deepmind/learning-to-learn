@@ -229,7 +229,7 @@ class BatchNorm(base.AbstractModule):
         initializer=tf.ones_initializer(),
         trainable=False)
 
-    self._moving_variance = tf.sub(self._moving_second_moment,
+    self._moving_variance = tf.subtract(self._moving_second_moment,
                                    tf.square(self._moving_mean),
                                    name="moving_variance")
 
