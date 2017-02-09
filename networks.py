@@ -38,7 +38,7 @@ def factory(net, net_options=(), net_path=None):
   net_options = dict(net_options)
 
   if net_path:
-    with open(net_path, "r") as f:
+    with open(net_path, "rb") as f:
       net_options["initializer"] = pickle.load(f)
 
   return net_class(**net_options)
@@ -56,7 +56,7 @@ def save(network, sess, filename=None):
     to_save[module_name][variable_name] = v.eval(sess)
 
   if filename:
-    with open(filename, "w") as f:
+    with open(filename, "wb") as f:
       pickle.dump(to_save, f)
 
   return to_save

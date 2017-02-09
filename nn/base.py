@@ -24,8 +24,9 @@ from __future__ import division
 from __future__ import print_function
 
 import abc
-import types
 import six
+from six import string_types
+from six.moves import xrange
 import tensorflow as tf
 
 
@@ -116,7 +117,7 @@ class AbstractModule(object):
     Raises:
       ValueError: If name is not specified.
     """
-    if not isinstance(name, types.StringTypes):
+    if not isinstance(name, string_types):
       raise ValueError("Name must be a string.")
     self._is_connected = False
     self._template = tf.make_template(name, self._build,

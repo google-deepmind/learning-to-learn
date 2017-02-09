@@ -19,6 +19,7 @@ from __future__ import print_function
 
 import collections
 
+from six.moves import xrange
 import tensorflow as tf
 
 from nn import base

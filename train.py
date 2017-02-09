@@ -20,6 +20,7 @@ from __future__ import print_function
 
 import os
 
+from six.moves import xrange
 import tensorflow as tf
 
 from tensorflow.contrib.learn.python.learn import monitored_session as ms

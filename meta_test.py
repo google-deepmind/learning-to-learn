@@ -23,6 +23,7 @@ import tempfile
 
 from nose_parameterized import parameterized
 import numpy as np
+from six.moves import xrange
 import tensorflow as tf
 
 import meta
@@ -62,7 +63,7 @@ class L2LTest(tf.test.TestCase):
 
     # Torch results
     torch_cost = 0.7325327
-    torch_final_x = np.array([0.8559])
+    torch_final_x = 0.8559
 
     self.assertAlmostEqual(cost, torch_cost, places=4)
     self.assertAlmostEqual(final_x[0], torch_final_x, places=4)
@@ -208,7 +209,8 @@ class L2LTest(tf.test.TestCase):
 
       # Save optimizer.
       tmp_dir = tempfile.mkdtemp()
-      net_path = optimizer.save(sess, path=tmp_dir).keys()[0]
+      save_result = optimizer.save(sess, path=tmp_dir)
+      net_path = next(iter(save_result))
 
       # Retrain original optimizer.
       cost, x = train(sess, minimize_ops, num_unrolls, num_epochs)

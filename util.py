@@ -22,6 +22,7 @@ import os
 from timeit import default_timer as timer
 
 import numpy as np
+from six.moves import xrange
 
 import problems
 

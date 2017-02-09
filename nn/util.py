@@ -109,7 +109,7 @@ def check_initializers(initializers, keys):
             ", ".join("'{}'".format(key) for key in keys)))
 
   def check_nested_callables(dictionary):
-    for key, entry in dictionary.iteritems():
+    for key, entry in dictionary.items():
       if isinstance(entry, dict):
         check_nested_callables(entry)
       elif not callable(entry):
@@ -156,7 +156,7 @@ def check_partitioners(partitioners, keys):
             ", ".join("'{}'".format(key) for key in keys)))
 
   def check_nested_callables(dictionary):
-    for key, entry in dictionary.iteritems():
+    for key, entry in dictionary.items():
       if isinstance(entry, dict):
         check_nested_callables(entry)
       elif not callable(entry):

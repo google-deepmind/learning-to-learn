@@ -27,6 +27,7 @@ import warnings
 
 
 import six
+from six.moves import xrange
 import tensorflow as tf
 
 from tensorflow.python.framework import tensor_shape

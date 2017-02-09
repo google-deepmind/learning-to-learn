@@ -182,7 +182,8 @@ def _make_nets(variables, config, net_assignments):
                        "a single net config.")
 
     with tf.variable_scope("vars_optimizer"):
-      key, kwargs = config.items()[0]
+      key = next(iter(config))
+      kwargs = config[key]
       net = networks.factory(**kwargs)
 
     nets = {key: net}
@@ -246,7 +247,7 @@ class MetaOptimizer(object):
   def save(self, sess, path=None):
     """Save meta-optimizer."""
     result = {}
-    for k, net in self._nets.iteritems():
+    for k, net in self._nets.items():
       if path is None:
         filename = None
         key = k
@@ -376,7 +377,7 @@ class MetaOptimizer(object):
                 nest.flatten(_nested_assign(state, s_final)))
 
     # Log internal variables.
-    for k, net in nets.iteritems():
+    for k, net in nets.items():
       print("Optimizer '{}' variables".format(k))
       print([op.name for op in nn.get_variables_in_module(net)])
 
