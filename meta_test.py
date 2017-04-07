@@ -24,10 +24,10 @@ import tempfile
 from nose_parameterized import parameterized
 import numpy as np
 from six.moves import xrange
+import sonnet as snt
 import tensorflow as tf
 
 import meta
-import nn
 import problems
 
 
@@ -141,10 +141,10 @@ class L2LTest(tf.test.TestCase):
     """Tests L2L applied to problem with convolutions."""
     kernel_shape = 4
     def convolutional_problem():
-      conv = nn.Conv2D(output_channels=1,
-                       kernel_shape=kernel_shape,
-                       stride=1,
-                       name="conv")
+      conv = snt.Conv2D(output_channels=1,
+                        kernel_shape=kernel_shape,
+                        stride=1,
+                        name="conv")
       output = conv(tf.random_normal((100, 100, 3, 10)))
       return tf.reduce_sum(output)
 

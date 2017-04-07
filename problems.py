@@ -24,11 +24,10 @@ import sys
 
 from six.moves import urllib
 from six.moves import xrange  # pylint: disable=redefined-builtin
+import sonnet as snt
 import tensorflow as tf
 
 from tensorflow.contrib.learn.python.learn.datasets import mnist as mnist_dataset
-
-import nn
 
 
 _nn_initializers = {
@@ -160,10 +159,10 @@ def mnist(layers,  # pylint: disable=invalid-name
   labels = tf.constant(data.labels, dtype=tf.int64, name="MNIST_labels")
 
   # Network.
-  mlp = nn.MLP(list(layers) + [10],
-               activation=activation_op,
-               initializers=_nn_initializers)
-  network = nn.Sequential([nn.BatchFlatten(), mlp])
+  mlp = snt.nets.MLP(list(layers) + [10],
+                     activation=activation_op,
+                     initializers=_nn_initializers)
+  network = snt.Sequential([snt.BatchFlatten(), mlp])
 
   def build():
     indices = tf.random_uniform([batch_size], 0, data.num_examples, tf.int64)
@@ -249,24 +248,24 @@ def cifar10(path,  # pylint: disable=invalid-name
                           strides=[1, 2, 2, 1],
                           padding="SAME")
 
-  conv = nn.ConvNet2D(output_channels=conv_channels,
-                      kernel_shapes=[5],
-                      strides=[1],
-                      paddings=[nn.SAME],
-                      activation=_conv_activation,
-                      activate_final=True,
-                      initializers=_nn_initializers,
-                      use_batch_norm=batch_norm)
+  conv = snt.nets.ConvNet2D(output_channels=conv_channels,
+                            kernel_shapes=[5],
+                            strides=[1],
+                            paddings=[snt.SAME],
+                            activation=_conv_activation,
+                            activate_final=True,
+                            initializers=_nn_initializers,
+                            use_batch_norm=batch_norm)
 
   if batch_norm:
-    linear_activation = lambda x: tf.nn.relu(nn.BatchNorm()(x))
+    linear_activation = lambda x: tf.nn.relu(snt.BatchNorm()(x))
   else:
     linear_activation = tf.nn.relu
 
-  mlp = nn.MLP(list(linear_layers) + [10],
-               activation=linear_activation,
-               initializers=_nn_initializers)
-  network = nn.Sequential([conv, nn.BatchFlatten(), mlp])
+  mlp = snt.nets.MLP(list(linear_layers) + [10],
+                     activation=linear_activation,
+                     initializers=_nn_initializers)
+  network = snt.Sequential([conv, snt.BatchFlatten(), mlp])
 
   def build():
     image_batch, label_batch = queue.dequeue_many(batch_size)

@@ -20,10 +20,10 @@ from __future__ import print_function
 
 from nose_parameterized import parameterized
 import numpy as np
+import sonnet as snt
 import tensorflow as tf
 
 import networks
-import nn
 
 
 class CoordinateWiseDeepLSTMTest(tf.test.TestCase):
@@ -45,7 +45,7 @@ class CoordinateWiseDeepLSTMTest(tf.test.TestCase):
     state = net.initial_state_for_inputs(gradients)
     net(gradients, state)
     # Weights and biases for two layers.
-    variables = nn.get_variables_in_module(net)
+    variables = snt.get_variables_in_module(net)
     self.assertEqual(len(variables), 4)
 
   @parameterized.expand([
@@ -90,7 +90,7 @@ class KernelDeepLSTMTest(tf.test.TestCase):
     state = net.initial_state_for_inputs(gradients)
     net(gradients, state)
     # Weights and biases for two layers.
-    variables = nn.get_variables_in_module(net)
+    variables = snt.get_variables_in_module(net)
     self.assertEqual(len(variables), 4)
 
   @parameterized.expand([
@@ -134,7 +134,7 @@ class SgdTest(tf.test.TestCase):
     net = networks.Sgd()
     state = net.initial_state_for_inputs(gradients)
     net(gradients, state)
-    variables = nn.get_variables_in_module(net)
+    variables = snt.get_variables_in_module(net)
     self.assertEqual(len(variables), 0)
 
   def testResults(self):
@@ -169,7 +169,7 @@ class AdamTest(tf.test.TestCase):
     net = networks.Adam()
     state = net.initial_state_for_inputs(gradients)
     net(gradients, state)
-    variables = nn.get_variables_in_module(net)
+    variables = snt.get_variables_in_module(net)
     self.assertEqual(len(variables), 0)
 
   def testZeroLearningRate(self):

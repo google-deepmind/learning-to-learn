@@ -23,13 +23,13 @@ import contextlib
 import os
 
 import mock
+import sonnet as snt
 import tensorflow as tf
 
 from tensorflow.python.framework import ops
 from tensorflow.python.util import nest
 
 import networks
-import nn
 
 
 def _nested_assign(ref, value):
@@ -379,7 +379,7 @@ class MetaOptimizer(object):
     # Log internal variables.
     for k, net in nets.items():
       print("Optimizer '{}' variables".format(k))
-      print([op.name for op in nn.get_variables_in_module(net)])
+      print([op.name for op in snt.get_variables_in_module(net)])
 
     return MetaLoss(loss, update, reset, fx_final, x_final)
 

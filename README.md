@@ -1,6 +1,10 @@
 # [Learning to Learn](https://arxiv.org/abs/1606.04474) in TensorFlow
 
-Compatible with TensorFlow 1.0
+
+## Dependencies
+
+* [TensorFlow >=1.0](https://www.tensorflow.org/)
+* [Sonnet >=1.0](https://github.com/deepmind/sonnet)
 
 
 ## Training

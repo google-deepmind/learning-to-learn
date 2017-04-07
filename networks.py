@@ -25,9 +25,9 @@ import sys
 import dill as pickle
 import numpy as np
 import six
+import sonnet as snt
 import tensorflow as tf
 
-import nn
 import preprocess
 
 
@@ -47,7 +47,7 @@ def factory(net, net_options=(), net_path=None):
 def save(network, sess, filename=None):
   """Save the variables contained by a network to disk."""
   to_save = collections.defaultdict(dict)
-  variables = nn.get_variables_in_module(network)
+  variables = snt.get_variables_in_module(network)
 
   for v in variables:
     split = v.name.split(":")[0].split("/")
@@ -63,7 +63,7 @@ def save(network, sess, filename=None):
 
 
 @six.add_metaclass(abc.ABCMeta)
-class Network(nn.RNNCore):
+class Network(snt.RNNCore):
   """Base class for meta-optimizer networks."""
 
   @abc.abstractmethod
@@ -166,8 +166,8 @@ class StandardDeepLSTM(Network):
           tf modules). Default is `tf.identity`.
       preprocess_options: Gradient preprocessing options.
       scale: Gradient scaling (default is 1.0).
-      initializer: Variable initializer for linear layer. See `nn.Linear` and
-          `nn.LSTM` docs for more info. This parameter can be a string (e.g.
+      initializer: Variable initializer for linear layer. See `snt.Linear` and
+          `snt.LSTM` docs for more info. This parameter can be a string (e.g.
           "zeros" will be converted to tf.zeros_initializer).
       name: Module name.
     """
@@ -188,12 +188,12 @@ class StandardDeepLSTM(Network):
         name = "lstm_{}".format(i)
         init = _get_layer_initializers(initializer, name,
                                        ("w_gates", "b_gates"))
-        self._cores.append(nn.LSTM(size, name=name, initializers=init))
-      self._rnn = nn.DeepRNN(self._cores, skip_connections=False,
-                             name="deep_rnn")
+        self._cores.append(snt.LSTM(size, name=name, initializers=init))
+      self._rnn = snt.DeepRNN(self._cores, skip_connections=False,
+                              name="deep_rnn")
 
       init = _get_layer_initializers(initializer, "linear", ("w", "b"))
-      self._linear = nn.Linear(output_size, name="linear", initializers=init)
+      self._linear = snt.Linear(output_size, name="linear", initializers=init)
 
   def _build(self, inputs, prev_state):
     """Connects the `StandardDeepLSTM` module into the graph.
