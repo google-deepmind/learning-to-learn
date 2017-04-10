@@ -19,12 +19,11 @@ from __future__ import division
 from __future__ import print_function
 
 import numpy as np
+import sonnet as snt
 import tensorflow as tf
 
-import nn
 
-
-class Clamp(nn.AbstractModule):
+class Clamp(snt.AbstractModule):
 
   def __init__(self, min_value=None, max_value=None, name="clamp"):
     super(Clamp, self).__init__(name=name)
@@ -40,7 +39,7 @@ class Clamp(nn.AbstractModule):
     return output
 
 
-class LogAndSign(nn.AbstractModule):
+class LogAndSign(snt.AbstractModule):
   """Log and sign preprocessing.
 
   As described in https://arxiv.org/pdf/1606.04474v1.pdf (Appendix A).
