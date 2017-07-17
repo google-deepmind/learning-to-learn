@@ -171,7 +171,7 @@ class StandardDeepLSTM(Network):
           "zeros" will be converted to tf.zeros_initializer).
       name: Module name.
     """
-    super(StandardDeepLSTM, self).__init__(name)
+    super(StandardDeepLSTM, self).__init__(name=name)
 
     self._output_size = output_size
     self._scale = scale
@@ -318,7 +318,7 @@ class Sgd(Network):
       learning_rate: constant learning rate to use.
       name: Module name.
     """
-    super(Sgd, self).__init__(name)
+    super(Sgd, self).__init__(name=name)
     self._learning_rate = learning_rate
 
   def _build(self, inputs, _):
