@@ -19,14 +19,12 @@ from __future__ import division
 from __future__ import print_function
 
 import collections
-import contextlib
 import os
 
 import mock
 import sonnet as snt
 import tensorflow as tf
 
-from tensorflow.python.framework import ops
 from tensorflow.python.util import nest
 
 import networks

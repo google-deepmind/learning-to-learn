@@ -22,7 +22,6 @@ import os
 import tempfile
 
 from nose_parameterized import parameterized
-import numpy as np
 from six.moves import xrange
 import sonnet as snt
 import tensorflow as tf
