@@ -39,7 +39,7 @@ flags.DEFINE_integer("log_period", 100, "Log period.")
 flags.DEFINE_integer("evaluation_period", 1000, "Evaluation period.")
 flags.DEFINE_integer("evaluation_epochs", 20, "Number of evaluation epochs.")
 
-flags.DEFINE_string("problem", "simple", "Type of problem.")
+flags.DEFINE_string("problem", "mnist", "Type of problem.")
 flags.DEFINE_integer("num_steps", 100,
                      "Number of optimization steps per epoch.")
 flags.DEFINE_integer("unroll_length", 20, "Meta-optimizer unroll length.")
@@ -53,7 +53,8 @@ def main(_):
 
   if FLAGS.save_path is not None:
     if os.path.exists(FLAGS.save_path):
-      raise ValueError("Folder {} already exists".format(FLAGS.save_path))
+      raise ValueError(
+          "Folder {} already exists".format(FLAGS.save_path))
     else:
       os.mkdir(FLAGS.save_path)
 
@@ -80,6 +81,7 @@ def main(_):
       # Training.
       time, cost = util.run_epoch(sess, cost_op, [update, step], reset,
                                   num_unrolls)
+      print('Epoch {}, Time {} \t Cost {}'.format(e, time, cost))
       total_time += time
       total_cost += cost
 
