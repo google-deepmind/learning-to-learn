@@ -1,0 +1,13 @@
+absl-py==0.9.0
+bleach==1.5.0
+dill==0.3.1.1
+dm-sonnet==1.7
+html5lib==0.9999999
+Markdown==3.0.1
+mock==3.0.5
+numpy==1.14.0
+protobuf==3.11.2
+six==1.13.0
+tensorflow-gpu==1.5.0
+tensorflow-tensorboard==1.5.1
+Werkzeug==0.16.0
