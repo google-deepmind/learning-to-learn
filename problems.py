@@ -213,7 +213,7 @@ def cifar10(path,  # pylint: disable=invalid-name
                               "data_batch_{}.bin".format(i))
                  for i in xrange(1, 6)]
   elif mode == "test":
-    filenames = [os.path.join(path, "test_batch.bin")]
+    filenames = [os.path.join(path, "cifar-10-batches-bin/test_batch.bin")]
   else:
     raise ValueError("Mode {} not recognised".format(mode))
 
@@ -258,7 +258,7 @@ def cifar10(path,  # pylint: disable=invalid-name
                             use_batch_norm=batch_norm)
 
   if batch_norm:
-    linear_activation = lambda x: tf.nn.relu(snt.BatchNorm()(x))
+    linear_activation = lambda x: tf.nn.relu(snt.BatchNorm()(x, is_training=True))
   else:
     linear_activation = tf.nn.relu
 
